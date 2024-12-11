@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IProduct } from './product.model';
 
 @Component({
   selector: 'bot-catalog',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent {
+
+  product: IProduct;
+
+  constructor(){
+    
+  }
 
 }
