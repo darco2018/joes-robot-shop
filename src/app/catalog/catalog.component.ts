@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IProduct } from './product.model';
+import { CartService } from '../service/cart.service';
 
 @Component({
   selector: 'bot-catalog',
@@ -7,9 +8,9 @@ import { IProduct } from './product.model';
   styleUrls: ['./catalog.component.css'],
 })
 export class CatalogComponent {
-  cart: IProduct[] = [];
   filter: String = ''; // click will change the value of filter and activate  getFilteredProducts(), which uses this variable
   products: IProduct[]; // IProduct here does not allow for null values in the array!
+  private cartSvc: CartService = inject(CartService);
 
   constructor() {
     this.products = [
@@ -190,8 +191,7 @@ export class CatalogComponent {
   }
 
   addToCart(product: IProduct) {
-    this.cart.push(product);
-    console.log(`Added product ${product.name} to cart`); // you need backticks for interpolation
+    this.cartSvc.add(product);
   }
 
   getFilteredProducts() {
