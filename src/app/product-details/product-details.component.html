@@ -1,1 +1,37 @@
+<div class="product">
+    <div class="product-details">
+      <!--
+      also ok:
+      src="{{ '/assets/images/robot-parts/' +  product.imageName }}"  - interpolation
+       or
+       [src]="'/assets/images/robot-parts/' +  product.imageName" - property binding
+       -->
+      <img [src]="getImagetUrl(product)" alt="{{ product?.imageName }}" />
+      <div class="product-info">
+        <!-- style binding -->
+        <div class="name" [style.color]="product?.name === 'Large Cyclops' ? 'blue' : ''">{{ product?.name }}</div>
+        <div class="description" [ngStyle]="{'color' : product?.name === 'Spring Base' ? 'red' : ''}">{{ product?.description }}</div>
+        <div class="category">Part Type: {{ product?.category }} </div>
+      </div>
+    </div>
+      <div class="price">
+      <!-- sposób pierwszy na pokazywanie can w zależności od discount:
+      <div *ngIf="product.discount === 0">{{ product.price | currency:'GBD' }}</div>
+      <div *ngIf="product.discount > 0" class="discount">
+        {{ (product.price * (1 - product.discount)) | currency:'GBP' }}
+      </div> -->
 
+      <!-- CONDITIONAL CSS ( with [ngClass] - classes binding to an HTML element)
+      ok for a single css class: 
+       [class.strikethrough]="product.discount  > 0"
+       For multiple we can have object in quotes: 
+        <div [ngClass]="{strikethrough: product.discount > 0, green: product.discount > 0}">
+          or with a method
+          -->
+      <div [ngClass]="getDiscountedClasses(product)">{{ product.price | currency:'USD' }}</div>
+      <div *ngIf="product.discount > 0" class="discount">
+        {{ (product.price * (1 - product.discount)) | currency:'USD' }}
+      </div>
+      <button class="cta" (click)="addToCart(product)">Buy</button>
+    </div>
+  </div>

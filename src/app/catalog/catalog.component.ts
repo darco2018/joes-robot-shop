@@ -194,22 +194,6 @@ export class CatalogComponent {
     console.log(`Added product ${product.name} to cart`); // you need backticks for interpolation
   }
 
-  // no function keyword!!
-  getImagetUrl(product: IProduct) {
-    return '/assets/images/robot-parts/' + product.imageName;
-  }
-
-  getDiscountedClasses(product: IProduct) {
-    if (product.discount > 0) {
-      return 'strikethrough green'; // we could also return an array
-    } else {
-      return '';
-    }
-
-    // I can just return object:
-    // return {strikethrough: product.discount > 0, green: product.discount > 0};
-  }
-
   getFilteredProducts() {
     return this.filter === ''
       ? this.products
