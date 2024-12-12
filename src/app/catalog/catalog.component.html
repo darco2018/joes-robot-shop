@@ -1,21 +1,27 @@
 <div class="container">
   <!-- click changes variable filter, which activates the getFilteredProducts(), which activates *ngFor -->
-   <!-- one-way binding upstream: from the template to the componenet class-->
+  <!-- one-way binding upstream: from the template to the componenet class-->
   <div class="filters">
-    <a class="button"  (click)="filter='Heads'">Heads</a>
-    <a class="button"  (click)="filter='Arms'">Arms</a>
-    <a class="button"  (click)="filter='Torsos'">Torsos</a>
-    <a class="button"  (click)="filter='Bases'">Bases</a>
-    <a class="button"  (click)="filter=''">All</a>
+    <a class="button" (click)="filter = 'Heads'">Heads</a>
+    <a class="button" (click)="filter = 'Arms'">Arms</a>
+    <a class="button" (click)="filter = 'Torsos'">Torsos</a>
+    <a class="button" (click)="filter = 'Bases'">Bases</a>
+    <a class="button" (click)="filter = ''">All</a>
     <!-- after (event) we have a statement, after [var] we have an expression-->
   </div>
 
   <ul class="products">
-    <li *ngFor="let currentProduct of getFilteredProducts()" class="product-item">
- <!-- IMPORTANT: here: product is passed from the parent componenet to child.ts -->
-    <bot-product-details [product] = "currentProduct"></bot-product-details>
-      
-  </li>
+    <li
+      *ngFor="let currentProduct of getFilteredProducts()"
+      class="product-item"
+    >
+      <!-- IMPORTANT: here: product is passed from the parent componenet to child.ts -->
+      <bot-product-details
+        [product]="currentProduct"
+        (buy)="addToCart(currentProduct)"
+      ></bot-product-details>
+      <!-- IMPORTANT: buy event is emitted to the parent method -->
+    </li>
   </ul>
 </div>
 

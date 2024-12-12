@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IProduct } from '../catalog/product.model';
 
 @Component({
@@ -14,10 +14,10 @@ export class ProductDetailsComponent {
 
   // IMPORTANT: here: product is passed in the html selector tag from the parent componenet
   @Input() product!: IProduct;
+  @Output() buy = new EventEmitter();
 
-  addToCart(product: IProduct) {
-    //'Method not implemented.'
-    console.log('addTocart - Method not implemented');
+  buyButtonCliked(product: IProduct) {
+    this.buy.emit(); // you 'emit' the buy event of class EventEmitter, which is declared above
   }
   // no function keyword!!
   getImagetUrl(product: IProduct) {
