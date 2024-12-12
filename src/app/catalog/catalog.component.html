@@ -1,28 +1,62 @@
 <div class="container">
+  <!-- click changes variable filter, which activates the getFilteredProducts(), which activates *ngFor -->
+   <!-- one-way binding upstream: from the template to the componenet class-->
   <div class="filters">
-    <a class="button">Heads</a>
-    <a class="button">Arms</a>
-    <a class="button">Torsos</a>
-    <a class="button">Bases</a>
-    <a class="button">All</a>
+    <a class="button"  (click)="filter='Heads'">Heads</a>
+    <a class="button"  (click)="filter='Arms'">Arms</a>
+    <a class="button"  (click)="filter='Torsos'">Torsos</a>
+    <a class="button"  (click)="filter='Bases'">Bases</a>
+    <a class="button"  (click)="filter=''">All</a>
+    <!-- after (event) we have a statement, after [var] we have an expression-->
   </div>
 
   <ul class="products">
-    <li class="product-item">
+    <li *ngFor="let product of getFilteredProducts()" class="product-item">
+ 
       <div class="product">
         <div class="product-details">
-          <img src="" alt="" />
+          <!--
+          also ok:
+          src="{{ '/assets/images/robot-parts/' +  product.imageName }}"  - interpolation
+           or
+           [src]="'/assets/images/robot-parts/' +  product.imageName" - property binding
+           -->
+          <img [src]="getImagetUrl(product)" alt="{{ product?.imageName }}" />
           <div class="product-info">
-            <div class="name"></div>
-            <div class="description"></div>
-            <div class="category">Part Type: </div>
+            <!-- style binding -->
+            <div class="name" [style.color]="product?.name === 'Large Cyclops' ? 'blue' : ''">{{ product?.name }}</div>
+            <div class="description" [ngStyle]="{'color' : product?.name === 'Spring Base' ? 'red' : ''}">{{ product?.description }}</div>
+            <div class="category">Part Type: {{ product?.category }} </div>
           </div>
         </div>
-        <div class="price">
-          <div></div>
-          <button class="cta">Buy</button>
+          <div class="price">
+          <!-- sposób pierwszy na pokazywanie can w zależności od discount:
+          <div *ngIf="product.discount === 0">{{ product.price | currency:'GBD' }}</div>
+          <div *ngIf="product.discount > 0" class="discount">
+            {{ (product.price * (1 - product.discount)) | currency:'GBP' }}
+          </div> -->
+  
+          <!-- CONDITIONAL CSS ( with [ngClass] - classes binding to an HTML element)
+          ok for a single css class: 
+           [class.strikethrough]="product.discount  > 0"
+           For multiple we can have object in quotes: 
+            <div [ngClass]="{strikethrough: product.discount > 0, green: product.discount > 0}">
+              or with a method
+              -->
+          <div [ngClass]="getDiscountedClasses(product)">{{ product.price | currency:'USD' }}</div>
+          <div *ngIf="product.discount > 0" class="discount">
+            {{ (product.price * (1 - product.discount)) | currency:'USD' }}
+          </div>
+          <button class="cta" (click)="addToCart(product)">Buy</button>
         </div>
       </div>
-    </li>
+      
+  </li>
   </ul>
 </div>
+
+<!-- product?.name - question mark here is called 'Safe Navigation Operator'. 
+ If one of the items in the products array were null, we would have null.name
+ which would stop rendering the following products. With the Operator, the faulty
+ product will be displayed with missing values, but the following products
+ will be displayed ok -->

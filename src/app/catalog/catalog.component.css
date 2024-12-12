@@ -1,3 +1,16 @@
+.strikethrough {
+  text-decoration: line-through;
+  font-size: smaller;
+}
+
+.green {
+  color:greenyellow;
+}
+
+.brown {
+  color:brown;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -23,6 +36,7 @@
 }
 
 /* Product Details */
+
 .product {
   display: flex;
   justify-content: space-between;
@@ -72,4 +86,9 @@
 .product .price button {
   padding: 10px;
   width: 100px;
+}
+
+.discount {
+  margin-top: 15px;
+  color: red;
 }
