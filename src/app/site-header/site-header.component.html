@@ -1,14 +1,15 @@
 <div class="container">
   <div class="left">
     <img class="logo" src="/assets/images/logo.png" alt="Logo" />
-    <a>Home</a>
-    <a href="">Catalog</a>
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+     <!-- we must pass empty string as parameter explicitely when using filter -->
+    <a [routerLink]="['/catalog', '']" routerLinkActive="active">Catalog</a>
     <div class="cart">
-      <a href="">Cart</a>
+      <a routerLink="cart" routerLinkActive="active">Cart</a>
     </div>
   </div>
   <div class="right">
-    <a href="">Sign In</a>
-    <a href="" class="cta">Register</a>
+    <a routerLink="signin">Sign In</a>
+    <a routerLink="register" class="cta">Register</a>
   </div>
 </div>

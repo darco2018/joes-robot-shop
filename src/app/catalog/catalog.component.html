@@ -1,12 +1,16 @@
 <div class="container">
   <!-- click changes variable filter, which activates the getFilteredProducts(), which activates *ngFor -->
   <!-- one-way binding upstream: from the template to the componenet class-->
-  <div class="filters">
-    <a class="button" (click)="filter = 'Heads'">Heads</a>
-    <a class="button" (click)="filter = 'Arms'">Arms</a>
-    <a class="button" (click)="filter = 'Torsos'">Torsos</a>
-    <a class="button" (click)="filter = 'Bases'">Bases</a>
-    <a class="button" (click)="filter = ''">All</a>
+  <div class="filters" >
+    <!-- formerly was:
+     <a class="button" (click)="filter = 'Heads'">Heads</a> -->
+    <a routerLink="/catalog/Heads" routerLinkActive="active" #rla="routerLinkActive"  class="button" >Heads</a>
+    <a routerLink="/catalog/Arms" routerLinkActive="active" class="button" >Arms</a>
+    <a routerLink="/catalog/Torsos" routerLinkActive="active" class="button" >Torsos</a>
+    <a routerLink="/catalog/Bases" routerLinkActive="active" class="button" >Bases</a>
+    <!-- we must pass empty string as parameter explicitely when using filter -->
+     <!-- we must pass routerLinkActiveOptions to prevent all button to be marked as active all the time-->
+    <a [routerLink]="['/catalog', '']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="button" >All</a>
     <!-- after (event) we have a statement, after [var] we have an expression-->
   </div>
 
