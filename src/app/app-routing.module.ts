@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { CatalogComponent } from './catalog/catalog.component';
+import { SignInComponent } from './user/sign-in/sign-in.component';
 
 // page created with ng generate module app-routing --flat --module=app
 
@@ -15,6 +16,7 @@ const routes: Routes = [
     component: CatalogComponent,
     title: "Catalog - Joe's Robot Shop",
   },
+  {path: 'sign-in', component: SignInComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 // pathMatch: 'full' ensures that the router will only 
