@@ -237,6 +237,7 @@ app.post("/api/register", (req, res) =>
     stored in a database server and the password should NEVER be stored as plain text. 
 */
 app.post("/api/sign-in", (req, res) => {
+  console.log("Called API Server /api/sign-in on port 8081!")
   const user = users[req.body.email];
   if (user && user.password === req.body.password) {
     res.status(200).send({

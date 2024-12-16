@@ -22,7 +22,7 @@ export class UserService {
     return this.http
       .post<IUser>('/api/sign-in', credentials)
       .pipe(map((user: IUser) => {
-        this.user.next(user);
+        this.user.next(user); //we cache our user value by emitting the returned user to our user Observable
         return user;
       }));
   }
