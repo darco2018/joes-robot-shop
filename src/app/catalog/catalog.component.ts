@@ -24,10 +24,9 @@ export class CatalogComponent {
     private route: ActivatedRoute
   ) {}
 
-  // lifecycle method
-  // the call will be made when you REFRESH localhost:4200 in the browser !!!
-  ngOnInit() {
-    //always rememer to subscribe to observable
+
+  ngOnInit() { // lifecycle hook called when you REFRESH localhost:4200 in the browser !!!
+   
     const observable = this.productSvc.getProducts();
     observable.subscribe((products) => {
       this.products = products;

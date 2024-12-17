@@ -11,7 +11,11 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CartComponent } from './cart/cart.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SignInComponent } from './user/sign-in/sign-in.component';
+import { TemplateFormControlsComponent } from './user/template-form-controls/template-form-controls.component';
 
+// modules are optional but apps are clearer with them
+
+// our main/default module
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +25,12 @@ import { SignInComponent } from './user/sign-in/sign-in.component';
     ProductDetailsComponent,
     CartComponent,
     SignInComponent,
+    TemplateFormControlsComponent
   ],
+// if a componenet uses a service or a model, they belong to this module implicitly
+
+  //I declared AppRoutingModule as @NgModule in app-routing.module.ts
+  // Also, AppRoutingModule exports RouterModule so its routes are available in the main module
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
