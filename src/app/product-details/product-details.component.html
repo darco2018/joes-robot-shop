@@ -6,22 +6,22 @@
        or
        [src]="'/assets/images/robot-parts/' +  product.imageName" - property binding
        -->
-    <img [src]="getImagetUrl(product)" alt="{{ product?.imageName }}" />
+    <img [src]="getImagetUrl(product)" alt="{{ product.imageName }}" />
     <div class="product-info">
       <!-- style binding -->
       <div
         class="name"
-        [style.color]="product?.name === 'Large Cyclops' ? 'blue' : ''"
+        [style.color]="product.name === 'Large Cyclops' ? 'blue' : ''"
       >
-        {{ product?.name }}
+        {{ product.name }}
       </div>
       <div
         class="description"
-        [ngStyle]="{ color: product?.name === 'Spring Base' ? 'red' : '' }"
+        [ngStyle]="{ color: product.name === 'Spring Base' ? 'red' : '' }"
       >
-        {{ product?.description }}
+        {{ product.description }}
       </div>
-      <div class="category">Part Type: {{ product?.category }}</div>
+      <div class="category">Part Type: {{ product.category }}</div>
     </div>
   </div>
   <div class="price">
