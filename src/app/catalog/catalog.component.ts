@@ -33,24 +33,27 @@ export class CatalogComponent {
     });
 
     // solution 1
+    //this.filter = this.route.snapshot.params['filter']; and <a class="button" (click)="filter = 'Heads'">Heads</a> in template
     // shapshot - point-in-time info about the current URL
-    // params - has all route params in the URL
-    // this solution works in many cases when we link to this component from another componenet.
-    // But it will not work when we link this compon to itself (the componenet will not be reloaded)
-    // So the buttons on the /catalog page will not change the URL if clicked
-    // The solution worked with  <a class="button" (click)="filter = 'Heads'">Heads</a>
-    // on the catalog.component.html
-    //this.filter = this.route.snapshot.params['filter'];
+    // params -an Observable which has all route params in the URL
+    // this solution works in many cases when we link to this component from another componenet(= click on buttons on the same componenet)
+    // But it will not work when we link this component to itself (the componenet will not be reloaded)
+    // So the buttons on the /catalog page will not change the filter in the URL if clicked from Bases to Heads, etc.    
 
     // solution 2
-    // subscription that listen to change of the route parameters
+    // this.route.params.subscribe listesn to change of the route parameters
     // when a new params object is published, the callback will be called
 
     // with query parameters, catalog?filter=Heads, replace params with queryPrams in next line
     // (full description in home.componenet.html)
-    this.route.params.subscribe(params => {
-      this.filter = params['filter'] ?? ''; // if filter not provided it will be set to empty string
-    });
+    this.route.params.subscribe({
+      next: params => { this.filter = params['filter'] ?? '';}, // if filter not provided it will be set to empty string  
+           
+    }); 
+    
+    // this part below DOES NOT get called when params change(a button is clicked) 
+    console.log('products: ' + this.products);
+    console.log('filter: ' + this.filter);
   }
 
   addToCart(product: IProduct) {
@@ -58,9 +61,11 @@ export class CatalogComponent {
     this.router.navigate(['/cart']);
   }
 
+  // the only way to get up-to-date products is to call products directly from html template like this:
   getFilteredProducts() {
     return this.filter === ''
       ? this.products
       : this.products.filter((product) => product.category === this.filter);
   }
+
 }

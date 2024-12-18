@@ -5,6 +5,7 @@
     <!-- formerly was:
      <a class="button" (click)="filter = 'Heads'">Heads</a> -->
     <a routerLink="/catalog/Heads" routerLinkActive="active" #rla="routerLinkActive"  class="button" >Heads</a>
+    <!-- Home link is active: {{ rla.isActive }} -->
     <a routerLink="/catalog/Arms" routerLinkActive="active" class="button" >Arms</a>
     <a routerLink="/catalog/Torsos" routerLinkActive="active" class="button" >Torsos</a>
     <a routerLink="/catalog/Bases" routerLinkActive="active" class="button" >Bases</a>
